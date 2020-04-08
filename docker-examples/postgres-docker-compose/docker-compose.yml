@@ -1,0 +1,22 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: sqlpad
+      POSTGRES_PASSWORD: sqlpad
+    volumes:
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+
+  sqlpad:
+    # Use Dockerfile at root of this project
+    build: ../../
+    hostname: 'sqlpad'
+    ports:
+      - '3000:3000'
+    environment:
+      SQLPAD_CONFIG: /etc/sqlpad/config.json
+    volumes:
+      - ./config.json:/etc/sqlpad/config.json
+      - ./seed-data:/etc/sqlpad/seed-data

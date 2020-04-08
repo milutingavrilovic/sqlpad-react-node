@@ -1,0 +1,27 @@
+{
+  "name": "sqlpad-react-node",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.9",
+    "prettier": "^1.19.1"
+  },
+  "prettier": {
+    "singleQuote": true
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css}": [
+      "prettier --write"
+    ]
+  },
+  "scripts": {
+    "fixlint": "npm run fixlint --prefix client && npm run fixlint --prefix server && prettier --write \"**/*.js\"",
+    "lint": "npm run lint --prefix client && npm run lint --prefix server && prettier --check \"**/*.js\""
+  }
+}
